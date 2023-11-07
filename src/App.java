@@ -9,47 +9,34 @@ public class App extends Application{
     public void start(Stage myStage){
         Pane pane =new Pane();
 
-        Rectangle rec1 = new Rectangle();
-        Rectangle rec2 = new Rectangle();
-        Rectangle rec3 = new Rectangle();
-        Rectangle rec4 = new Rectangle();
+        Grid grid = new Grid(pane, new Rectangle(0,0,190,190));
+        
 
-        rec1.setFill(Color.BLACK);
-        rec2.setFill(Color.BLACK);
-        rec3.setFill(Color.BLACK);
-        rec4.setFill(Color.BLACK);
+        //Some test cases can delete/////////////////////////////////////////////////////////////////////////
+        grid.addGrid(pane, 1, 0);
+        grid.addGrid(pane, 1, 1);
+        grid.addGrid(pane, 2, 1);
 
-        rec1.heightProperty().bind(pane.heightProperty().divide(19.0/17));
-        rec2.heightProperty().bind(pane.heightProperty().divide(19.0/17));
-        rec3.heightProperty().bind(pane.heightProperty().divide(19.0));
-        rec4.heightProperty().bind(pane.heightProperty().divide(19.0));
+        grid.addO(pane, 2, 0).setFill(Color.RED);
+        grid.addO(pane, 0, 0).setFill(Color.GREEN);
+        grid.addO(pane, 2, 2).setFill(Color.BLUE);
 
-        rec1.widthProperty().bind(pane.widthProperty().divide(19));
-        rec2.widthProperty().bind(pane.widthProperty().divide(19));
-        rec3.widthProperty().bind(pane.widthProperty().divide(19.0/17));
-        rec4.widthProperty().bind(pane.widthProperty().divide(19.0/17));
+        grid.addX(pane, 0, 2).setFill(Color.RED);
+        grid.addX(pane, 1, 2).setFill(Color.GREEN);
+        grid.addX(pane, 0, 1).setFill(Color.BLUE);
+        
+        
+        ((Grid)(grid.getTile(1,1))).addGrid(pane,2,2).addO(pane, 0, 0).setFill(Color.BLUE);
+        ((Grid)(grid.getTile(1,1))).addGrid(pane,2,2).addX(pane, 2, 0).setFill(Color.RED);
+        ((Grid)(grid.getTile(1,1))).addO(pane,1,2).setFill(Color.BLUE);
+        //end of test cases//////////////////////////////////////////////////////////////////////////////////
+       
+        
+    
 
-        rec1.xProperty().bind(pane.widthProperty().divide(19.0/6));
-        rec2.xProperty().bind(pane.widthProperty().divide(19.0/12));
-        rec3.xProperty().bind(pane.widthProperty().divide(19));
-        rec4.xProperty().bind(pane.widthProperty().divide(19));
- 
-        rec1.yProperty().bind(pane.heightProperty().divide(19));
-        rec2.yProperty().bind(pane.heightProperty().divide(19));
-        rec3.yProperty().bind(pane.heightProperty().divide(19.0/6));
-        rec4.yProperty().bind(pane.heightProperty().divide(19.0/12));
-
-        pane.getChildren().add(rec1);
-        pane.getChildren().add(rec2);
-        pane.getChildren().add(rec3);
-        pane.getChildren().add(rec4);
-
-        MyO tac = new MyO(pane, new Rectangle(10, 10, 50, 50));
-        tac.setFill(Color.BLUE);
-        tac.add(pane);
-
-        Scene scene = new Scene(pane ,190, 190 );
+        Scene scene = new Scene(pane ,500, 500 );
         myStage.setScene(scene);
+        myStage.setTitle("TicTacToe");
         myStage.show(); 
     }
     public static void main(String[] args){
