@@ -43,7 +43,7 @@ public class MyO extends Tile{
         shape.setFill(value);
     }
 
-    public Shape getShape(){
+    /*public Shape getShape(){
         return shape;
-    }
+    }*/
 }

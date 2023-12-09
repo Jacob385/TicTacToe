@@ -1,22 +1,39 @@
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
 
 public class Grid extends Tile{
-    
-    private Tile[][] gridArray;
+
+    public Tile[][] gridArray;
+    public int rows = 3;
+    public int cols = 3;
 
     Grid(Pane pane, Rectangle bounds){
+
         super(pane, bounds);
 
+        this.gridArray = new Tile[rows][cols];
+        this.initialize(pane);
         //fill Gridarry with new Tile()
-        this.gridArray = new Tile[3][3];
-        for (Tile[] tilearray : gridArray){
-            for(Tile tile : tilearray){
-                tile = new Tile();
+        /*for( int i = 0; i < rows; i++)
+        {
+            for (int j = 0; j < cols; j++) {
+                BlankTile tile = new BlankTile();
+                tile.setShape(new Rectangle( bounds.getX(), bounds.getY(),
+                bounds.heightProperty().doubleValue(), bounds.widthProperty().doubleValue()));
+                tile.setCenterShape(true);
+                tile.setCacheShape(true);
+                pane.getChildren().add(tile.shape);
+                tile.addEventHandler(MouseEvent.MOUSE_CLICKED, (e) -> {
+                tile.shape.setFill(Color.RED);
+                });
+                gridArray[i][j] = tile;
+
             }
-        }  
-        
+        }
+*/
+
         //drawing lines within the bounds
         Rectangle rec1 = new Rectangle();
         Rectangle rec2 = new Rectangle();
@@ -42,7 +59,7 @@ public class Grid extends Tile{
         rec2.xProperty().bind(this.bounds.widthProperty().divide(19.0/12).add(this.bounds.xProperty()));
         rec3.xProperty().bind(this.bounds.widthProperty().divide(19).add(this.bounds.xProperty()));
         rec4.xProperty().bind(this.bounds.widthProperty().divide(19).add(this.bounds.xProperty()));
- 
+
         rec1.yProperty().bind(this.bounds.heightProperty().divide(19).add(this.bounds.yProperty()));
         rec2.yProperty().bind(this.bounds.heightProperty().divide(19).add(this.bounds.yProperty()));
         rec3.yProperty().bind(this.bounds.heightProperty().divide(19.0/6).add(this.bounds.yProperty()));
@@ -72,14 +89,34 @@ public class Grid extends Tile{
         return myO;
     }
 
-    public Tile getTile(int x, int y){return gridArray[x][y];}
-    
+    public BlankTile addBlank (Pane pane, int x, int y) {
+        BlankTile myBlank = new BlankTile(pane, getInitialTileRec(x,y));
+        myBlank.setCenterShape(true);
+        myBlank.setCacheShape(true);
+        gridArray[x][y] = myBlank;
+        return myBlank;
+    }
+
+    public Tile getTile(int x, int y){
+        return gridArray[x][y];
+    }
+
+
     private Rectangle getInitialTileRec(int x, int y){
         return new Rectangle(
-            (x  * initialRec.widthProperty().doubleValue() * 6.0 / 19.0) + (initialRec.widthProperty().doubleValue() / 19.0) + initialRec.xProperty().doubleValue(),
-            (y  * initialRec.heightProperty().doubleValue() * 6.0 / 19.0) + (initialRec.heightProperty().doubleValue() / 19.0) + initialRec.yProperty().doubleValue(), 
-            (initialRec.widthProperty().doubleValue()  * 4.0 / 19.0) + (initialRec.widthProperty().doubleValue() / 19.0), 
-            (initialRec.heightProperty().doubleValue() * 4.0 / 19.0)+ (initialRec.heightProperty().doubleValue() / 19.0)
-            );
-    }  
+                (x  * initialRec.widthProperty().doubleValue() * 6.0 / 19.0) + (initialRec.widthProperty().doubleValue() / 19.0) + initialRec.xProperty().doubleValue(),
+                (y  * initialRec.heightProperty().doubleValue() * 6.0 / 19.0) + (initialRec.heightProperty().doubleValue() / 19.0) + initialRec.yProperty().doubleValue(),
+                (initialRec.widthProperty().doubleValue()  * 4.0 / 19.0) + (initialRec.widthProperty().doubleValue() / 19.0),
+                (initialRec.heightProperty().doubleValue() * 4.0 / 19.0)+ (initialRec.heightProperty().doubleValue() / 19.0)
+        );
+    }
+
+    public void initialize(Pane pane) {
+        for( int i = 0; i < rows; i++)
+        {
+            for (int j = 0; j < cols; j++) {
+                addBlank(pane,i,j);
+            }
+        }
+    }
 }

@@ -52,7 +52,7 @@ public class MyX extends Tile{
         poly.setFill(value);
     }
 
-    public Shape getShape(){
+    /*public Shape getShape(){
         return poly;
-    }
+    }*/
 }
