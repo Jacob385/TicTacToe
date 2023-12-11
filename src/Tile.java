@@ -3,7 +3,7 @@ import javafx.scene.shape.Rectangle;
 
 public class Tile {
     Rectangle bounds, initialRec;
-    private int player;
+    int player;
 
     Tile(){
         this.player = 0;
@@ -20,6 +20,17 @@ public class Tile {
    
         this.initialRec = bounds;
     }
+    public Boolean isClickedOn(Pane gamePane, double x, double y){
+        return isWithinBounds(x, y);
+    }
 
-    public int getPlayer(){return player;}
+    public Boolean isWithinBounds(double x, double y){
+        double tempX = this.bounds.xProperty().doubleValue();
+        double tempY = this.bounds.yProperty().doubleValue();
+        double tempW = this.bounds.widthProperty().doubleValue();
+        double tempH = this.bounds.heightProperty().doubleValue();
+        
+        return tempX <= x && x <= tempX + tempW && tempY <= y && y <= tempY + tempH;
+    }
+
 }
