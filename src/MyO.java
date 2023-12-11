@@ -13,6 +13,8 @@ public class MyO extends Tile{
     MyO(Pane pane, Rectangle rec){
         super(pane, rec);
 
+        player = 2;
+
         Ellipse outerEllipse = new Ellipse(
             initialRec.widthProperty().divide(2).doubleValue(),
             initialRec.heightProperty().divide(2).doubleValue(),
@@ -46,4 +48,5 @@ public class MyO extends Tile{
     public Shape getShape(){
         return shape;
     }
+
 }

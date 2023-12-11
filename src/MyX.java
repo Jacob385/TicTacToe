@@ -13,6 +13,8 @@ public class MyX extends Tile{
     MyX(Pane pane, Rectangle rec){
         super(pane, rec);
 
+        player = 1;
+
         double x = 0;
         double y = 0;
         double w = initialRec.widthProperty().doubleValue();
@@ -39,9 +41,11 @@ public class MyX extends Tile{
          });
         
 
+        //seting scale
         poly.scaleXProperty().bind(this.bounds.widthProperty().divide(initialRec.widthProperty()).multiply(17.0/19));
         poly.scaleYProperty().bind(this.bounds.heightProperty().divide(initialRec.heightProperty()).multiply(17.0/19));
 
+        //setting x and y 
         poly.layoutXProperty().bind(this.bounds.widthProperty().divide(19).add(this.bounds.xProperty()).add(poly.scaleXProperty().subtract(1).divide(2).multiply(initialRec.widthProperty())));
         poly.layoutYProperty().bind(this.bounds.heightProperty().divide(19).add(this.bounds.yProperty()).add(poly.scaleYProperty().subtract(1).divide(2).multiply(initialRec.heightProperty())));
 
@@ -55,4 +59,5 @@ public class MyX extends Tile{
     public Shape getShape(){
         return poly;
     }
+
 }
