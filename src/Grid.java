@@ -88,6 +88,13 @@ public class Grid extends Tile
         return myO;
     }
 
+    public Tile addTile(Pane pane, int x, int y)
+    {
+        Tile tile = new Tile(pane, getInitialTileRec(x, y));
+        gridArray[x][y] = tile;
+        return tile;
+    }
+
     public static void setAsX(Pane pane, Tile grid)
     {
         grid = new MyX(pane, grid.initialRec);

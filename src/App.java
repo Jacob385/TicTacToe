@@ -73,7 +73,7 @@ public class App extends Application
                 }
             }     
             updateIndicatorRec(grid.initialRec);
-           
+            player = 1;
             myStage.setScene(gameScene);
         });
         Button threeDButton = new Button("3D TicTacToe");
@@ -85,18 +85,26 @@ public class App extends Application
 
             game3dPane.getChildren().add(gameBorderPane);
             gameover[0] = false;
+            player = 1;
             myStage.setScene(game3dScene);
         });
         Button normalButton = new Button("TicTacToe");
         normalButton.setOnAction(e -> {
             gamePane.getChildren().clear();
-            
             Grid.setAsNewGrid(gamePane, (Grid)grid, new Rectangle(0, 0, 190, 190));
-
+            for(int x = 0 ; x < 3 ; x++)
+            {
+                for(int y = 0 ; y < 3 ; y++)
+                {
+                    ((Grid)grid).addTile(gamePane, x, y);
+                }
+            }  
             gamePane.getChildren().add(gameBorderPane);
             gameover[0] = false;
+            player = 1;
             myStage.setScene(gameScene);
         });
+
         Button optionsButton = new Button("Options");
         optionsButton.setOnAction(e -> {
             myStage.setScene(optionsScene);
@@ -123,7 +131,7 @@ public class App extends Application
             {
                 return;
             }
-            
+
             ((Grid)grid).isClickedOn(gamePane, e.getX(), e.getY(), currentX, currentY);
 
             int winner = ((Grid)grid).checkWin();
